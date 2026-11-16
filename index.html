@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#176b43">
+  <title>Smart CropCare</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="desktop-background">
+    <div class="phone" id="phone">
+
+      <div class="phone-camera"></div>
+
+      <div class="status-bar">
+        <span id="phoneTime">9:41</span>
+        <div class="status-icons">
+          <span>●</span><span>◉</span><span>▰</span>
+        </div>
+      </div>
+
+      <div class="phone-content" id="phoneContent">
+
+        <!-- WELCOME PAGE -->
+        <section class="page" id="welcomePage">
+          <div class="welcome-logo">🌱</div>
+          <h1>Smart CropCare</h1>
+          <p class="subtitle">AI-Powered Crop Disease Detection and Management</p>
+          <div class="welcome-image">🌾</div>
+          <h2>Healthy Crops, Better Harvests</h2>
+          <p class="muted">Detect crop diseases early and protect your harvest.</p>
+          <button class="primary-btn" onclick="showPage('loginPage')">Get Started</button>
+          <button class="secondary-btn" onclick="showPage('registerPage')">Create Account</button>
+          <p class="small-text">Your smart farming assistant</p>
+        </section>
+
+        <!-- LOGIN PAGE -->
+        <section class="page hidden" id="loginPage">
+          <button class="back-btn" onclick="showPage('welcomePage')">← Back</button>
+          <div class="auth-icon">🌱</div>
+          <h1>Welcome Back</h1>
+          <p class="muted">Sign in to your Smart CropCare account</p>
+
+          <form id="loginForm">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" placeholder="example@email.com" required>
+
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" required>
+
+            <label>Login as</label>
+            <select id="loginRole">
+              <option value="farmer">Farmer / Umuhinzi</option>
+              <option value="admin">Administrator</option>
+            </select>
+
+            <button class="primary-btn" type="submit">Sign In</button>
+          </form>
+          <p class="auth-link">Don't have an account? <a onclick="showPage('registerPage')">Register</a></p>
+          <p class="small-text">Demo admin: admin@smartcrop.rw / Admin@123</p>
+        </section>
+
+        <!-- REGISTER PAGE -->
+        <section class="page hidden" id="registerPage">
+          <button class="back-btn" onclick="showPage('welcomePage')">← Back</button>
+          <div class="auth-icon">👨‍🌾</div>
+          <h1>Create Account</h1>
+          <p class="muted">Join Smart CropCare today</p>
+
+          <form id="registerForm">
+            <label>Full Name</label>
+            <input id="registerName" type="text" placeholder="Your full name" required>
+
+            <label>Email Address</label>
+            <input id="registerEmail" type="email" placeholder="Email address" required>
+
+            <label>Phone Number</label>
+            <input id="registerPhone" type="tel" placeholder="+250..." required>
+
+            <label>District / Akarere</label>
+            <input id="registerDistrict" type="text" placeholder="e.g. Muhanga" required>
+
+            <label>Password</label>
+            <input id="registerPassword" type="password" minlength="8" placeholder="At least 8 characters" required>
+
+            <label>Confirm Password</label>
+            <input id="confirmPassword" type="password" minlength="8" placeholder="Confirm password" required>
+
+            <button class="primary-btn" type="submit">Create Account</button>
+          </form>
+          <p class="auth-link">Already registered? <a onclick="showPage('loginPage')">Sign In</a></p>
+        </section>
+
+        <!-- FARMER DASHBOARD -->
+        <section class="page hidden" id="farmerPage">
+          <header class="app-header">
+            <div>
+              <p class="eyebrow">SMART CROPCARE</p>
+              <h2>Hello, <span id="farmerWelcome">Farmer</span> 👋</h2>
+              <p class="muted">Let's take care of your crops.</p>
+            </div>
+            <button class="round-btn" onclick="toggleTheme()">☀️</button>
+          </header>
+
+          <div class="weather-card">
+            <div>
+              <p>Today's farming overview</p>
+              <h2>🌤️ Smart Farming</h2>
+              <small>Monitor your crops and farm activities</small>
+            </div>
+            <span class="weather-icon">🌱</span>
+          </div>
+
+          <h3 class="section-heading">Your Farm Statistics</h3>
+          <div class="stats-grid">
+            <div class="stat-card"><span>🌾</span><strong id="farmCount">0</strong><small>My Farms</small></div>
+            <div class="stat-card"><span>🔬</span><strong id="detectionCount">0</strong><small>Scans</small></div>
+            <div class="stat-card"><span>⚠️</span><strong id="diseaseCount">0</strong><small>Diseases</small></div>
+            <div class="stat-card"><span>✅</span><strong id="healthyCount">0</strong><small>Healthy</small></div>
+          </div>
+
+          <div class="section-title-row">
+            <h3>Quick Actions</h3>
+          </div>
+          <div class="action-grid">
+            <button onclick="showPage('detectionPage')"><span>🔬</span>Detect Disease</button>
+            <button onclick="showPage('farmsPage')"><span>🌾</span>My Farms</button>
+            <button onclick="showPage('historyPage')"><span>📋</span>History</button>
+            <button onclick="showPage('assistantPage')"><span>🤖</span>AI Assistant</button>
+          </div>
+
+          <h3 class="section-heading">Recent Activity</h3>
+          <div id="recentActivity" class="list-card">
+            <p class="muted">No activity yet. Start by scanning a crop.</p>
+          </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD -->
+        <section class="page hidden" id="adminPage">
+          <header class="app-header">
+            <div>
+              <p class="eyebrow">ADMIN PANEL</p>
+              <h2>Administrator 👋</h2>
+              <p class="muted">Smart CropCare overview</p>
+            </div>
+            <button class="round-btn" onclick="toggleTheme()">☀️</button>
+          </header>
+
+          <div class="admin-banner">
+            <h2>🌱 Smart CropCare</h2>
+            <p>Manage farmers and monitor crop disease activity.</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card"><span>👨‍🌾</span><strong id="adminFarmerCount">0</strong><small>Farmers</small></div>
+            <div class="stat-card"><span>🌾</span><strong id="adminFarmCount">0</strong><small>Farms</small></div>
+            <div class="stat-card"><span>🔬</span><strong id="adminDetectionCount">0</strong><small>Scans</small></div>
+            <div class="stat-card"><span>⚠️</span><strong id="adminDiseaseCount">0</strong><small>Diseases</small></div>
+          </div>
+
+          <h3 class="section-heading">Registered Farmers</h3>
+          <div class="list-card" id="adminFarmers">
+            <p class="muted">No farmers registered yet.</p>
+          </div>
+
+          <button class="secondary-btn" onclick="showPage('historyPage')">View Detection History</button>
+        </section>
+
+        <!-- CROP DETECTION -->
+        <section class="page hidden" id="detectionPage">
+          <div class="page-heading">
+            <button class="back-btn" onclick="goDashboard()">←</button>
+            <div><h2>Crop Detection</h2><p class="muted">AI Disease Analysis</p></div>
+          </div>
+
+          <div class="info-banner">
+            <span>🔬</span>
+            <div><strong>Crop Disease Detection</strong><p>Upload a crop leaf image to analyze it.</p></div>
+          </div>
+
+          <div class="upload-box" id="uploadBox">
+            <div class="upload-icon">📸</div>
+            <h3>Upload Crop Image</h3>
+            <p class="muted">Choose a clear image of the affected leaf.</p>
+            <input type="file" id="cropImage" accept="image/png,image/jpeg,image/webp">
+            <label for="cropImage" class="upload-btn">Choose Image</label>
+            <img id="previewImage" class="preview-image hidden" alt="Crop preview">
+          </div>
+
+          <label>Select Crop Type</label>
+          <select id="cropType">
+            <option value="Cassava">Cassava / Imyumbati</option>
+            <option value="Beans">Beans / Ibishyimbo</option>
+            <option value="Maize">Maize / Ibigori</option>
+            <option value="Tomato">Tomato / Inyanya</option>
+            <option value="Potato">Potato / Ibirayi</option>
+          </select>
+
+          <button class="primary-btn" id="analyzeButton" onclick="analyzeCrop()">Analyze Crop 🔍</button>
+
+          <div id="detectionResult" class="result-card hidden">
+            <h3>Analysis Result</h3>
+            <p id="resultText"></p>
+            <p class="muted" id="resultAdvice"></p>
+          </div>
+          <p class="small-text">Prototype mode: results are simulated, not a real AI diagnosis.</p>
+        </section>
+
+        <!-- HISTORY -->
+        <section class="page hidden" id="historyPage">
+          <div class="page-heading">
+            <button class="back-btn" onclick="goDashboard()">←</button>
+            <div><h2>Detection History</h2><p class="muted">Your previous crop scans</p></div>
+          </div>
+          <div id="historyList" class="list-card">
+            <p class="muted">No detection history available.</p>
+          </div>
+        </section>
+
+        <!-- FARMS -->
+        <section class="page hidden" id="farmsPage">
+          <div class="page-heading">
+            <button class="back-btn" onclick="goDashboard()">←</button>
+            <div><h2>My Farms</h2><p class="muted">Manage your farms</p></div>
+          </div>
+
+          <form id="farmForm" class="form-card">
+            <h3>Add New Farm</h3>
+            <label>Farm Name</label>
+            <input id="farmName" placeholder="e.g. My Main Farm" required>
+            <label>Location</label>
+            <input id="farmLocation" placeholder="District / Sector" required>
+            <label>Crop Type</label>
+            <select id="farmCrop">
+              <option>Cassava</option><option>Beans</option><option>Maize</option>
+              <option>Tomato</option><option>Potato</option>
+            </select>
+            <label>Farm Size (hectares)</label>
+            <input id="farmSize" type="number" min="0.01" step="0.01" placeholder="e.g. 2" required>
+            <button class="primary-btn" type="submit">Save Farm</button>
+          </form>
+          <h3 class="section-heading">My Registered Farms</h3>
+          <div id="farmList" class="list-card"></div>
+        </section>
+
+        <!-- CALENDAR / TASKS -->
+        <section class="page hidden" id="calendarPage">
+          <div class="page-heading">
+            <button class="back-btn" onclick="goDashboard()">←</button>
+            <div><h2>Farm Calendar</h2><p class="muted">Plan your farming activities</p></div>
+          </div>
+
+          <form id="taskForm" class="form-card">
+            <h3>Add Farm Activity</h3>
+            <label>Activity</label>
+            <input id="taskName" placeholder="e.g. Watering crops" required>
+            <label>Date</label>
+            <input id="taskDate" type="date" required>
+            <label>Description</label>
+            <textarea id="taskDescription" placeholder="Describe the activity"></textarea>
+            <button class="primary-btn" type="submit">Add Activity</button>
+          </form>
+          <h3 class="section-heading">Upcoming Activities</h3>
+          <div id="taskList" class="list-card"></div>
+        </section>
+
+        <!-- AI ASSISTANT -->
+        <section class="page hidden" id="assistantPage">
+          <div class="page-heading">
+            <button class="back-btn" onclick="goDashboard()">←</button>
+            <div><h2>Farm Assistant</h2><p class="muted">Your farming helper</p></div>
+          </div>
+          <div class="assistant-banner">
+            <span>🤖</span><div><strong>Smart Crop Assistant</strong><p>Ask questions about farming.</p></div>
+          </div>
+          <div id="assistantMessages" class="chat-messages">
+            <div class="chat-bubble bot">Muraho! 👋 How can I help you with your crops today?</div>
+          </div>
+          <form id="assistantForm" class="chat-form">
+            <input id="assistantQuestion" placeholder="Ask a farming question..." required>
+            <button type="submit">➤</button>
+          </form>
+          <p class="small-text">This is a demo assistant, not a connected AI service.</p>
+        </section>
+
+        <!-- MARKET -->
+        <section class="page hidden" id="marketPage">
+          <div class="page-heading">
+            <button class="back-btn" onclick="goDashboard()">←</button>
+            <div><h2>Farm Market</h2><p class="muted">Agricultural resources</p></div>
+          </div>
+          <div class="market-card"><span>🌱</span><div><strong>Seeds</strong><p>Choose quality seeds for planting.</p></div></div>
+          <div class="market-card"><span>🧪</span><div><strong>Fertilizers</strong><p>Learn about crop nutrition.</p></div></div>
+          <div class="market-card"><span>🛠️</span><div><strong>Farm Tools</strong><p>Explore useful farming equipment.</p></div></div>
+          <div class="market-card"><span>📚</span><div><strong>Farming Guides</strong><p>Learn better farming practices.</p></div></div>
+        </section>
+
+        <!-- PROFILE -->
+        <section class="page hidden" id="profilePage">
+          <div class="page-heading">
+            <button class="back-btn" onclick="goDashboard()">←</button>
+            <div><h2>My Profile</h2><p class="muted">Account information</p></div>
+          </div>
+          <div class="profile-avatar">👨‍🌾</div>
+          <h2 class="profile-name" id="profileName">Farmer</h2>
+          <p class="muted center" id="profileRole">Farmer Account</p>
+          <div class="profile-details">
+            <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
+            <p><strong>District:</strong> <span id="profileDistrict"></span></p>
+          </div>
+          <button class="secondary-btn" onclick="toggleTheme()">Toggle Light / Dark Mode</button>
+          <button class="danger-btn" onclick="logout()">Sign Out / Sohoka</button>
+        </section>
+
+      </div>
+
+      <!-- BOTTOM NAVIGATION -->
+      <nav class="bottom-nav hidden" id="bottomNav">
+        <button onclick="goDashboard()"><span>🏠</span><small>Home</small></button>
+        <button onclick="showPage('detectionPage')"><span>🔬</span><small>Detect</small></button>
+        <button onclick="showPage('farmsPage')"><span>🌾</span><small>Farms</small></button>
+        <button onclick="showPage('calendarPage')"><span>📅</span><small>Tasks</small></button>
+        <button onclick="showPage('profilePage')"><span>👤</span><small>Profile</small></button>
+      </nav>
+
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
